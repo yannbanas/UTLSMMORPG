@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,12 @@ namespace LoginServer
 
         private static void Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.Console(outputTemplate: "{Timestamp:HH:mm:ss}|{SourceContext}|{Message:lj}|{NewLine}{Exception}")
+                .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day,
+                              outputTemplate: "{Timestamp:HH:mm:ss}|{SourceContext}|{Message:lj}|{NewLine}{Exception}")
+                .CreateLogger();
+
             // Chargement de la configuration
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -31,37 +38,37 @@ namespace LoginServer
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
             // Exécution du serveur de connexion
-            Console.WriteLine("Starting login server...");
+            Log.Information("Starting login server...");
             var server = serviceProvider.GetRequiredService<LoginServer>();
             server.Start();
         }
 
         private static void ConfigureServices(IServiceCollection services)
         {
+            Log.Information("Configuring services...");
+            services.AddSingleton<IConfiguration>(Configuration);
+
             // Récupérez directement l'objet DatabaseSettings depuis la configuration
             var dbSettings = Configuration.GetSection("DatabaseSettings").Get<DatabaseSettings>();
+            Log.Information("Database settings: {0}", dbSettings.ToString());
 
             // Configuration de la base de données
             if (dbSettings.Type == "Npgsql")
             {
                 services.AddDbContext<AppDbContext>(options =>
                     options.UseNpgsql(dbSettings.ConnectionString));
+                Log.Information("Using PostgreSQL database");
             }
             else if (dbSettings.Type == "Sqlite")
             {
                 services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlite(dbSettings.ConnectionString));
+                Log.Information("Using SQLite database");
             }
 
             // Configuration d'autres services
             services.AddTransient<LoginServer>();
 
-            // Appliquer les migrations
-            using (var scope = services.BuildServiceProvider().CreateScope())
-            {
-                var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-                context.Database.Migrate();
-            }
         }
 
     }

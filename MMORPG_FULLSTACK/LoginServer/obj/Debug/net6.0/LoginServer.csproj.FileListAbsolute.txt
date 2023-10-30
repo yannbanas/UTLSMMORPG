@@ -146,3 +146,8 @@ C:\Users\EltrasStudio\Documents\GitHub\UTLSMMORPG\MMORPG_FULLSTACK\LoginServer\o
 C:\Users\EltrasStudio\Documents\GitHub\UTLSMMORPG\MMORPG_FULLSTACK\LoginServer\obj\Debug\net6.0\LoginServer.pdb
 C:\Users\EltrasStudio\Documents\GitHub\UTLSMMORPG\MMORPG_FULLSTACK\LoginServer\obj\Debug\net6.0\LoginServer.genruntimeconfig.cache
 C:\Users\EltrasStudio\Documents\GitHub\UTLSMMORPG\MMORPG_FULLSTACK\LoginServer\obj\Debug\net6.0\ref\LoginServer.dll
+C:\Users\EltrasStudio\Documents\GitHub\UTLSMMORPG\MMORPG_FULLSTACK\LoginServer\bin\Debug\net6.0\Serilog.dll
+C:\Users\EltrasStudio\Documents\GitHub\UTLSMMORPG\MMORPG_FULLSTACK\LoginServer\bin\Debug\net6.0\Serilog.Extensions.Logging.dll
+C:\Users\EltrasStudio\Documents\GitHub\UTLSMMORPG\MMORPG_FULLSTACK\LoginServer\bin\Debug\net6.0\Serilog.Sinks.Console.dll
+C:\Users\EltrasStudio\Documents\GitHub\UTLSMMORPG\MMORPG_FULLSTACK\LoginServer\bin\Debug\net6.0\Serilog.Formatting.Compact.dll
+C:\Users\EltrasStudio\Documents\GitHub\UTLSMMORPG\MMORPG_FULLSTACK\LoginServer\bin\Debug\net6.0\Serilog.Sinks.File.dll

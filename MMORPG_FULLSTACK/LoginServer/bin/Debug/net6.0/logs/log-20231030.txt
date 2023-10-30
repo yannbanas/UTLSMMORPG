@@ -1,0 +1,28 @@
+16:37:30||Démarrage de l'application|
+16:37:30||Login server started on port 8888|
+16:42:03||Démarrage de l'application|
+16:42:03||Login server started on port 8888|
+16:48:26||Configuring services...|
+16:48:26||Database settings: LoginServer.Database.DatabaseSettings|
+16:48:26||Using PostgreSQL database|
+16:48:26||Starting login server...|
+16:48:26||Login server started on port 8888|
+17:58:44||Configuring services...|
+17:58:44||Database settings: LoginServer.Database.DatabaseSettings|
+17:58:44||Using PostgreSQL database|
+17:58:44||Starting login server...|
+17:58:45||Login server started on port 8888|
+18:11:56||Client connected from 192.168.1.48:44435|
+18:11:56||Client disconnected|
+18:11:56||Client disconnected|
+19:40:41||Configuring services...|
+19:40:42||Database settings: LoginServer.Database.DatabaseSettings|
+19:40:42||Using PostgreSQL database|
+19:40:42||Starting login server...|
+19:40:42||Login server started on port 8888|
+19:47:07||Client connected from 192.168.1.48:46573|
+19:47:07||Received login request from testUser|
+19:47:08||Login successful for testUser|
+19:47:08||Token b99ce1b9-b49a-451f-9ce1-49d57eed2e47 saved for testUser|
+19:47:08||Sent login response to testUser|
+19:47:08||Client disconnected|

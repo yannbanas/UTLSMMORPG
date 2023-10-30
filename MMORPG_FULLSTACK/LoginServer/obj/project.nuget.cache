@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "n645+CmrePUdEEGIfQJ3sKHdOxwbMH3Qxwf+cU37RgpN+K6UQqYajQIyM0wtHR4wRp15iJ1u/oY8z40SBjccTw==",
+  "dgSpecHash": "NOcH1R3QrNPRdGCIVkBSsYbxkKU7snBQqnzGitK3ZfyYM57hL9WjkDKHSW2ATkc3/ru4nTJeMIavR3QXN4Ctxg==",
   "success": true,
   "projectFilePath": "C:\\Users\\EltrasStudio\\Documents\\GitHub\\UTLSMMORPG\\MMORPG_FULLSTACK\\LoginServer\\LoginServer.csproj",
   "expectedPackageFiles": [
@@ -34,6 +34,11 @@
     "C:\\Users\\EltrasStudio\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\EltrasStudio\\.nuget\\packages\\npgsql\\7.0.6\\npgsql.7.0.6.nupkg.sha512",
     "C:\\Users\\EltrasStudio\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\7.0.11\\npgsql.entityframeworkcore.postgresql.7.0.11.nupkg.sha512",
+    "C:\\Users\\EltrasStudio\\.nuget\\packages\\serilog\\3.0.1\\serilog.3.0.1.nupkg.sha512",
+    "C:\\Users\\EltrasStudio\\.nuget\\packages\\serilog.extensions.logging\\7.0.0\\serilog.extensions.logging.7.0.0.nupkg.sha512",
+    "C:\\Users\\EltrasStudio\\.nuget\\packages\\serilog.formatting.compact\\1.1.0\\serilog.formatting.compact.1.1.0.nupkg.sha512",
+    "C:\\Users\\EltrasStudio\\.nuget\\packages\\serilog.sinks.console\\4.1.0\\serilog.sinks.console.4.1.0.nupkg.sha512",
+    "C:\\Users\\EltrasStudio\\.nuget\\packages\\serilog.sinks.file\\5.0.0\\serilog.sinks.file.5.0.0.nupkg.sha512",
     "C:\\Users\\EltrasStudio\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.4\\sqlitepclraw.bundle_e_sqlite3.2.1.4.nupkg.sha512",
     "C:\\Users\\EltrasStudio\\.nuget\\packages\\sqlitepclraw.core\\2.1.4\\sqlitepclraw.core.2.1.4.nupkg.sha512",
     "C:\\Users\\EltrasStudio\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.4\\sqlitepclraw.lib.e_sqlite3.2.1.4.nupkg.sha512",

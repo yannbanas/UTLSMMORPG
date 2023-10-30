@@ -7,27 +7,33 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using LoginServer.Database;
 using LoginServer.Packets;
+using Microsoft.Extensions.Configuration;
+using Serilog;
 
 namespace LoginServer
 {
     public class LoginServer
     {
         private TcpListener listener;
+        private int port;
+        private readonly IConfiguration _configuration;
         private readonly AppDbContext _dbContext;
 
         // Dictionnaire pour stocker les jetons des sessions et les associer aux noms d'utilisateur
         private Dictionary<string, string> userTokens = new Dictionary<string, string>();
 
-        public LoginServer(AppDbContext dbContext)
+        public LoginServer(AppDbContext dbContext, IConfiguration configuration)
         {
             _dbContext = dbContext;
-            listener = new TcpListener(IPAddress.Any, 8888); // Vous pouvez rendre le port configurable plus tard
+            _configuration = configuration;
+            port = _configuration.GetValue<int>("LoginServerPort");
+            listener = new TcpListener(IPAddress.Any, port);
         }
 
         public void Start()
         {
             listener.Start();
-            Console.WriteLine("Login server started...");
+            Log.Information("Login server started on port {0}", port);
 
             while (true)
             {
@@ -40,7 +46,7 @@ namespace LoginServer
         {
             try
             {
-                Console.WriteLine("Client connecté.");
+                Log.Information("Client connected from {0}", client.Client.RemoteEndPoint);
 
                 using (var stream = client.GetStream())
                 {
@@ -49,7 +55,7 @@ namespace LoginServer
 
                     if (bytesRead == 0)
                     {
-                        Console.WriteLine("Le client s'est déconnecté avant d'envoyer des données.");
+                        Log.Information("Client disconnected");
                         return;
                     }
 
@@ -58,11 +64,14 @@ namespace LoginServer
 
                     if (receivedPacket.Type == PacketType.LoginRequest)
                     {
+
                         LoginRequest loginPacket = new LoginRequest("", "");
                         loginPacket.Deserialize(buffer.Take(bytesRead).ToArray());
+                        Log.Information("Received login request from {0}", loginPacket.Username);
 
                         bool loginSuccess = CheckLogin(loginPacket.Username, loginPacket.Password);
                         LoginResponse responsePacket;
+                        Log.Information("Login {0} for {1}", loginSuccess ? "successful" : "failed", loginPacket.Username);
 
                         if (loginSuccess)
                         {
@@ -74,6 +83,7 @@ namespace LoginServer
                             {
                                 user.Token = token;
                                 await _dbContext.SaveChangesAsync();
+                                Log.Information("Token {0} saved for {1}", token, loginPacket.Username);
                             }
 
                             responsePacket = new LoginResponse(true, token);
@@ -85,16 +95,18 @@ namespace LoginServer
 
                         byte[] response = responsePacket.Serialize();
                         await stream.WriteAsync(response, 0, response.Length);
+                        Log.Information("Sent login response to {0}", loginPacket.Username);
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erreur lors du traitement du client : " + ex.Message);
+                Log.Error(ex, "Error while handling client");
             }
             finally
             {
                 client.Close();
+                Log.Information("Client disconnected");
             }
         }
         private bool CheckLogin(string username, string password)

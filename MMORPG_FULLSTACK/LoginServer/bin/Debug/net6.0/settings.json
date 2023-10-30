@@ -1,8 +1,7 @@
 {
     "DatabaseSettings": {
         "Type": "Npgsql",
-        "DefaultConnection": "Host=192.168.1.48;Username=btechpostgresuser;Password=2B90F460-D040-4A11-9582-AF56C5598C18;Database=btechlogindb",
         "ConnectionString": "Host=192.168.1.48;Username=btechpostgresuser;Password=2B90F460-D040-4A11-9582-AF56C5598C18;Database=btechlogindb",
-        "Port": 8888
-    }
+    },
+    "LoginServerPort": 8888,
 }

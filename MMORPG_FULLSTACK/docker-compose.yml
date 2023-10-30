@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  loginserver:
+    image: ${DOCKER_REGISTRY-}loginserver
+    ports:
+      - "0.0.0.0:8888:8888"
+    build:
+      context: .
+      dockerfile: LoginServer/Dockerfile
+
+networks:
+  loginServerNetwork:
+    driver: bridge

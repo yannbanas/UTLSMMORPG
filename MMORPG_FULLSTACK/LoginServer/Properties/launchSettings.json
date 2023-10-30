@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "LoginServer": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

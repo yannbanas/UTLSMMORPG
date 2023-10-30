@@ -1,0 +1,14 @@
+C:\Users\EltrasStudio\Documents\MMORPG_FULLSTACK\bin\Debug\LoginServer.deps.json
+C:\Users\EltrasStudio\Documents\MMORPG_FULLSTACK\bin\Debug\LoginServer.runtimeconfig.json
+C:\Users\EltrasStudio\Documents\MMORPG_FULLSTACK\bin\Debug\LoginServer.exe
+C:\Users\EltrasStudio\Documents\MMORPG_FULLSTACK\bin\Debug\LoginServer.dll
+C:\Users\EltrasStudio\Documents\MMORPG_FULLSTACK\bin\Debug\LoginServer.pdb
+C:\Users\EltrasStudio\Documents\MMORPG_FULLSTACK\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
+C:\Users\EltrasStudio\Documents\MMORPG_FULLSTACK\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
+C:\Users\EltrasStudio\Documents\MMORPG_FULLSTACK\obj\Debug\docker-compose.dcproj.CopyComplete
+C:\Users\EltrasStudio\Documents\MMORPG_FULLSTACK\bin\Debug\Npgsql.dll
+C:\Users\EltrasStudio\Documents\MMORPG_FULLSTACK\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\EltrasStudio\Documents\MMORPG_FULLSTACK\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\Users\EltrasStudio\Documents\MMORPG_FULLSTACK\bin\Debug\System.Text.Json.dll
+C:\Users\EltrasStudio\Documents\MMORPG_FULLSTACK\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\EltrasStudio\Documents\MMORPG_FULLSTACK\bin\Debug\System.Text.Encodings.Web.dll

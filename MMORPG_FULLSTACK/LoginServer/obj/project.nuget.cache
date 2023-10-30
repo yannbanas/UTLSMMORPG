@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yNtfoBamGPfEgxbYnGtdjCRlXnVtilT5l9f7Mk2R/Em0kC3ysE8Tl0KupuiJmLKhW5GDzXT1CmYHLlgjRBE4fQ==",
+  "dgSpecHash": "n645+CmrePUdEEGIfQJ3sKHdOxwbMH3Qxwf+cU37RgpN+K6UQqYajQIyM0wtHR4wRp15iJ1u/oY8z40SBjccTw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\EltrasStudio\\Documents\\MMORPG_FULLSTACK\\LoginServer\\LoginServer.csproj",
+  "projectFilePath": "C:\\Users\\EltrasStudio\\Documents\\GitHub\\UTLSMMORPG\\MMORPG_FULLSTACK\\LoginServer\\LoginServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\EltrasStudio\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\EltrasStudio\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.13\\microsoft.data.sqlite.core.7.0.13.nupkg.sha512",

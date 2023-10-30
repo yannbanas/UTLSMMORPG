@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\EltrasStudio\\Documents\\MMORPG_FULLSTACK\\LoginServer\\LoginServer.csproj": {}
+    "C:\\Users\\EltrasStudio\\Documents\\GitHub\\UTLSMMORPG\\MMORPG_FULLSTACK\\LoginServer\\LoginServer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\EltrasStudio\\Documents\\MMORPG_FULLSTACK\\LoginServer\\LoginServer.csproj": {
+    "C:\\Users\\EltrasStudio\\Documents\\GitHub\\UTLSMMORPG\\MMORPG_FULLSTACK\\LoginServer\\LoginServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\EltrasStudio\\Documents\\MMORPG_FULLSTACK\\LoginServer\\LoginServer.csproj",
+        "projectUniqueName": "C:\\Users\\EltrasStudio\\Documents\\GitHub\\UTLSMMORPG\\MMORPG_FULLSTACK\\LoginServer\\LoginServer.csproj",
         "projectName": "LoginServer",
-        "projectPath": "C:\\Users\\EltrasStudio\\Documents\\MMORPG_FULLSTACK\\LoginServer\\LoginServer.csproj",
+        "projectPath": "C:\\Users\\EltrasStudio\\Documents\\GitHub\\UTLSMMORPG\\MMORPG_FULLSTACK\\LoginServer\\LoginServer.csproj",
         "packagesPath": "C:\\Users\\EltrasStudio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\EltrasStudio\\Documents\\MMORPG_FULLSTACK\\LoginServer\\obj\\",
+        "outputPath": "C:\\Users\\EltrasStudio\\Documents\\GitHub\\UTLSMMORPG\\MMORPG_FULLSTACK\\LoginServer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

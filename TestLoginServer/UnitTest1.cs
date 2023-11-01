@@ -43,6 +43,41 @@ namespace TestLoginServer
             context.SaveChanges();
         }
 
+        [Fact]
+        public void TestDatabaseAndServerConnectionWithFalseLogin()
+        {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+            // 1. Vérifiez la connexion à Postgres.
+            var options = new DbContextOptionsBuilder<AppDbContext>()
+                .UseNpgsql(_connectionString)
+                .Options;
+            using var context = new AppDbContext(options);
+
+            // Testez la connexion à la base de données en récupérant un enregistrement.
+            var anyUser = context.Users.FirstOrDefault();
+
+            // 2. Créez un utilisateur de test.
+            var user = new User
+            {
+                Username = "userone",
+                Password = "passwordOne",
+                Token = Guid.NewGuid().ToString(),
+                Created = DateTime.Now,
+                IsValid = true
+            };
+            context.Users.Add(user);
+            context.SaveChanges();
+
+            // 3. Simulez une connexion au serveur et envoi/réception de paquets.
+            bool serverConnected = SimulateServerConnectionWithWrongLogin();
+            Assert.True(serverConnected);
+
+            // Nettoyer: supprimer l'utilisateur de test de la base de données
+            context.Users.Remove(user);
+            context.SaveChanges();
+        }
+
 
         // Cette méthode établit une véritable connexion TCP au port 8888, envoie un paquet et attend une réponse.
         private bool SimulateServerConnectionWithPacketExchange()
@@ -53,6 +88,34 @@ namespace TestLoginServer
                 client.Connect("192.168.1.48", 8888);
 
                 var loginRequest = new LoginRequest("testUser", "testPassword");
+                var serializedRequest = loginRequest.Serialize();
+
+                client.GetStream().Write(serializedRequest, 0, serializedRequest.Length);
+
+                byte[] buffer = new byte[4096];
+                int bytesRead = client.GetStream().Read(buffer, 0, buffer.Length);
+
+                var responsePacket = new LoginResponse(false);
+                responsePacket.Deserialize(buffer);
+
+                Console.WriteLine(responsePacket.ToString()); // Affichage du contenu du paquet de réponse
+
+                return responsePacket != null;
+            }
+            catch (SocketException)
+            {
+                return false;
+            }
+        }
+
+        private bool SimulateServerConnectionWithWrongLogin()
+        {
+            using TcpClient client = new TcpClient();
+            try
+            {
+                client.Connect("192.168.1.48", 8888);
+
+                var loginRequest = new LoginRequest("userone", "Azerty*1");
                 var serializedRequest = loginRequest.Serialize();
 
                 client.GetStream().Write(serializedRequest, 0, serializedRequest.Length);

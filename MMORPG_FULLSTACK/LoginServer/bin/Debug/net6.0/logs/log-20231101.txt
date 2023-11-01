@@ -1,0 +1,22 @@
+15:57:22||Configuring services...|
+15:57:22||Sucessfully loaded database settings|
+15:57:22||PostgreSQL database configured|
+15:57:22||Starting login server...|
+15:57:22||Login server started on port 8888|
+15:57:41||Client connected from 192.168.1.48:63257|
+15:57:41||Received login request from testUser|
+15:57:42||Token a84a6cbd-01aa-4e02-9ce3-004293184bec saved for testUser|
+15:57:42||packet before serialize: ||LoginResponse|SUCCESS:a84a6cbd-01aa-4e02-9ce3-004293184bec|
+15:57:42||Sent login response to testUser|
+15:57:42||Client disconnected|
+16:00:46||Client connected from 192.168.1.48:63326|
+16:00:46||Received login request from testUser|
+16:00:46||Token 26e9ac4d-be47-4168-82c1-733a9d1b781b saved for testUser|
+16:00:46||packet before serialize: ||LoginResponse|SUCCESS:26e9ac4d-be47-4168-82c1-733a9d1b781b|
+16:00:46||Sent login response to testUser|
+16:00:46||Client disconnected|
+16:02:50||Client connected from 192.168.1.48:63350|
+16:02:50||Received login request from userone|
+16:02:50||Login failed for userone|
+16:02:50||packet before serialize: ||Notification|Login ou mot de passe incorrecte|
+16:02:50||Client disconnected|

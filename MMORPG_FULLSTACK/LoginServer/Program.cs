@@ -50,20 +50,20 @@ namespace LoginServer
 
             // Récupérez directement l'objet DatabaseSettings depuis la configuration
             var dbSettings = Configuration.GetSection("DatabaseSettings").Get<DatabaseSettings>();
-            Log.Information("Database settings: {0}", dbSettings.ToString());
+            Log.Information("Sucessfully loaded database settings");
 
             // Configuration de la base de données
             if (dbSettings.Type == "Npgsql")
             {
                 services.AddDbContext<AppDbContext>(options =>
                     options.UseNpgsql(dbSettings.ConnectionString));
-                Log.Information("Using PostgreSQL database");
+                Log.Information("PostgreSQL database configured");
             }
             else if (dbSettings.Type == "Sqlite")
             {
                 services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlite(dbSettings.ConnectionString));
-                Log.Information("Using SQLite database");
+                Log.Information("SQLite database configured");
             }
 
             // Configuration d'autres services

@@ -12,4 +12,3 @@ C:\Users\EltrasStudio\Documents\MMORPG_FULLSTACK\bin\Debug\System.Diagnostics.Di
 C:\Users\EltrasStudio\Documents\MMORPG_FULLSTACK\bin\Debug\System.Text.Json.dll
 C:\Users\EltrasStudio\Documents\MMORPG_FULLSTACK\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\EltrasStudio\Documents\MMORPG_FULLSTACK\bin\Debug\System.Text.Encodings.Web.dll
-C:\Users\EltrasStudio\Documents\GitHub\UTLSMMORPG\MMORPG_FULLSTACK\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache

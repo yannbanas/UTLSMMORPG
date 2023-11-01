@@ -13,6 +13,8 @@ namespace LoginServer.Packets
     {
         LoginRequest,
         LoginResponse,
+        Maintenance,
+        Notification,
         // ... autres types
     }
 

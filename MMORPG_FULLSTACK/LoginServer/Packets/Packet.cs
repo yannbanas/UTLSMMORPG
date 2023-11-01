@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,9 +35,14 @@ namespace LoginServer.Packets
         public override byte[] Serialize()
         {
             string strData = $"{Nonce}|{HMAC}|{Type}|{Data}";
+            Log.Information($"packet before serialize: {strData}");
             return Encoding.UTF8.GetBytes(strData);
         }
 
+        public override string ToString()
+        {
+            return $"Packet: {Nonce}|{HMAC}|{Type}|{Data}";
+        }
         // Vous pourriez également envisager d'ajouter des méthodes pour gérer le HMAC, le nonce, etc.
     }
 }

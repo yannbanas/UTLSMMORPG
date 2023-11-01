@@ -1,0 +1,34 @@
+08:45:26||Configuring services...|
+08:45:26||Sucessfully loaded database settings|
+08:45:26||PostgreSQL database configured|
+08:45:26||Starting login server...|
+08:45:27||Login server started on port 8888|
+08:45:58||Client connected from 192.168.1.48:63685|
+08:45:58||Received login request from testUser|
+08:45:59||Login successful for testUser|
+08:45:59||Token 6a42c4e7-df62-46fe-bb86-d769dc9cbeae saved for testUser|
+08:45:59||Sent login response to testUser|
+08:45:59||Client disconnected|
+08:58:48||Configuring services...|
+08:58:48||Sucessfully loaded database settings|
+08:58:48||PostgreSQL database configured|
+08:58:48||Starting login server...|
+08:58:48||Login server started on port 8888|
+08:59:05||Client connected from 192.168.1.48:63948|
+08:59:05||Received login request from testUser|
+08:59:06||Login successful for testUser|
+08:59:06||Token 76559d96-ddf4-4120-8890-83854c4ca9b0 saved for testUser|
+08:59:06||Sent login response to testUser|
+08:59:06||Client disconnected|
+09:02:24||Configuring services...|
+09:02:25||Sucessfully loaded database settings|
+09:02:25||PostgreSQL database configured|
+09:02:25||Starting login server...|
+09:02:25||Login server started on port 8888|
+09:02:39||Client connected from 192.168.1.48:64022|
+09:02:39||Received login request from testUser|
+09:02:40||Login successful for testUser|
+09:02:40||Token cde4bf4a-790f-4fb3-bcf5-e5cb2b8397cb saved for testUser|
+09:02:40||packet before serialize: ||LoginResponse|SUCCESS:cde4bf4a-790f-4fb3-bcf5-e5cb2b8397cb|
+09:02:40||Sent login response to testUser|
+09:02:40||Client disconnected|

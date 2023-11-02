@@ -9,76 +9,25 @@ namespace LoginServer.Cryptography
 {
     public sealed class ChaCha20 : IDisposable
     {
-        /// <summary>
-        /// Only allowed key lenght in bytes
-        /// </summary>
         public const int allowedKeyLength = 32;
-
-        /// <summary>
-        /// Only allowed nonce lenght in bytes
-        /// </summary>
         public const int allowedNonceLength = 12;
-
-        /// <summary>
-        /// How many bytes are processed per loop
-        /// </summary>
         public const int processBytesAtTime = 64;
-
         private const int stateLength = 16;
-
-        /// <summary>
-        /// The ChaCha20 state (aka "context")
-        /// </summary>
         private readonly uint[] state = new uint[stateLength];
-
-        /// <summary>
-        /// Determines if the objects in this class have been disposed of. Set to true by the Dispose() method.
-        /// </summary>
         private bool isDisposed = false;
 
-        /// <summary>
-        /// Set up a new ChaCha20 state. The lengths of the given parameters are checked before encryption happens.
-        /// </summary>
-        /// <remarks>
-        /// See <a href="https://tools.ietf.org/html/rfc7539#page-10">ChaCha20 Spec Section 2.4</a> for a detailed description of the inputs.
-        /// </remarks>
-        /// <param name="key">
-        /// A 32-byte (256-bit) key, treated as a concatenation of eight 32-bit little-endian integers
-        /// </param>
-        /// <param name="nonce">
-        /// A 12-byte (96-bit) nonce, treated as a concatenation of three 32-bit little-endian integers
-        /// </param>
-        /// <param name="counter">
-        /// A 4-byte (32-bit) block counter, treated as a 32-bit little-endian integer
-        /// </param>
         public ChaCha20(byte[] key, byte[] nonce, uint counter)
         {
             this.KeySetup(key);
             this.IvSetup(nonce, counter);
         }
 
-#if NET6_0_OR_GREATER
-
-        /// <summary>
-        /// Set up a new ChaCha20 state. The lengths of the given parameters are checked before encryption happens.
-        /// </summary>
-        /// <remarks>
-        /// See <a href="https://tools.ietf.org/html/rfc7539#page-10">ChaCha20 Spec Section 2.4</a> for a detailed description of the inputs.
-        /// </remarks>
-        /// <param name="key">A 32-byte (256-bit) key, treated as a concatenation of eight 32-bit little-endian integers</param>
-        /// <param name="nonce">A 12-byte (96-bit) nonce, treated as a concatenation of three 32-bit little-endian integers</param>
-        /// <param name="counter">A 4-byte (32-bit) block counter, treated as a 32-bit little-endian integer</param>
         public ChaCha20(ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce, uint counter)
         {
             this.KeySetup(key.ToArray());
             this.IvSetup(nonce.ToArray(), counter);
         }
 
-#endif // NET6_0_OR_GREATER
-
-        /// <summary>
-        /// The ChaCha20 state (aka "context"). Read-Only.
-        /// </summary>
         public uint[] State
         {
             get
@@ -87,17 +36,6 @@ namespace LoginServer.Cryptography
             }
         }
 
-        // These are the same constants defined in the reference implementation.
-        // http://cr.yp.to/streamciphers/timings/estreambench/submissions/salsa20/chacha8/ref/chacha.c
-        private static readonly byte[] sigma = Encoding.ASCII.GetBytes("expand 32-byte k");
-        private static readonly byte[] tau = Encoding.ASCII.GetBytes("expand 16-byte k");
-
-        /// <summary>
-        /// Set up the ChaCha state with the given key. A 32-byte key is required and enforced.
-        /// </summary>
-        /// <param name="key">
-        /// A 32-byte (256-bit) key, treated as a concatenation of eight 32-bit little-endian integers
-        /// </param>
         private void KeySetup(byte[] key)
         {
             if (key == null)
@@ -129,15 +67,6 @@ namespace LoginServer.Cryptography
             state[3] = Util.U8To32Little(constants, 12);
         }
 
-        /// <summary>
-        /// Set up the ChaCha state with the given nonce (aka Initialization Vector or IV) and block counter. A 12-byte nonce and a 4-byte counter are required.
-        /// </summary>
-        /// <param name="nonce">
-        /// A 12-byte (96-bit) nonce, treated as a concatenation of three 32-bit little-endian integers
-        /// </param>
-        /// <param name="counter">
-        /// A 4-byte (32-bit) block counter, treated as a 32-bit little-endian integer
-        /// </param>
         private void IvSetup(byte[] nonce, uint counter)
         {
             if (nonce == null)
@@ -160,60 +89,26 @@ namespace LoginServer.Cryptography
             state[15] = Util.U8To32Little(nonce, 8);
         }
 
-        #region Encryption methods
-
-        /// <summary>
-        /// Encrypt arbitrary-length byte array (input), writing the resulting byte array to preallocated output buffer.
-        /// </summary>
-        /// <remarks>Since this is symmetric operation, it doesn't really matter if you use Encrypt or Decrypt method</remarks>
-        /// <param name="output">Output byte array, must have enough bytes</param>
-        /// <param name="input">Input byte array</param>
-        /// <param name="numBytes">Number of bytes to encrypt</param>
         public void EncryptBytes(byte[] output, byte[] input, int numBytes)
         {
             this.WorkBytes(output, input, numBytes);
         }
 
-        /// <summary>
-        /// Encrypt arbitrary-length byte stream (input), writing the resulting bytes to another stream (output)
-        /// </summary>
-        /// <param name="output">Output stream</param>
-        /// <param name="input">Input stream</param>
-        /// <param name="howManyBytesToProcessAtTime">How many bytes to read and write at time, default is 1024</param>
         public void EncryptStream(Stream output, Stream input, int howManyBytesToProcessAtTime = 1024)
         {
             this.WorkStreams(output, input, howManyBytesToProcessAtTime);
         }
 
-        /// <summary>
-        /// Async encrypt arbitrary-length byte stream (input), writing the resulting bytes to another stream (output)
-        /// </summary>
-        /// <param name="output">Output stream</param>
-        /// <param name="input">Input stream</param>
-        /// <param name="howManyBytesToProcessAtTime">How many bytes to read and write at time, default is 1024</param>
         public async Task EncryptStreamAsync(Stream output, Stream input, int howManyBytesToProcessAtTime = 1024)
         {
             await this.WorkStreamsAsync(output, input, howManyBytesToProcessAtTime);
         }
 
-        /// <summary>
-        /// Encrypt arbitrary-length byte array (input), writing the resulting byte array to preallocated output buffer.
-        /// </summary>
-        /// <remarks>Since this is symmetric operation, it doesn't really matter if you use Encrypt or Decrypt method</remarks>
-        /// <param name="output">Output byte array, must have enough bytes</param>
-        /// <param name="input">Input byte array</param>
         public void EncryptBytes(byte[] output, byte[] input)
         {
             this.WorkBytes(output, input, input.Length);
         }
 
-        /// <summary>
-        /// Encrypt arbitrary-length byte array (input), writing the resulting byte array that is allocated by method.
-        /// </summary>
-        /// <remarks>Since this is symmetric operation, it doesn't really matter if you use Encrypt or Decrypt method</remarks>
-        /// <param name="input">Input byte array</param>
-        /// <param name="numBytes">Number of bytes to encrypt</param>
-        /// <returns>Byte array that contains encrypted bytes</returns>
         public byte[] EncryptBytes(byte[] input, int numBytes)
         {
             byte[] returnArray = new byte[numBytes];
@@ -221,12 +116,6 @@ namespace LoginServer.Cryptography
             return returnArray;
         }
 
-        /// <summary>
-        /// Encrypt arbitrary-length byte array (input), writing the resulting byte array that is allocated by method.
-        /// </summary>
-        /// <remarks>Since this is symmetric operation, it doesn't really matter if you use Encrypt or Decrypt method</remarks>
-        /// <param name="input">Input byte array</param>
-        /// <returns>Byte array that contains encrypted bytes</returns>
         public byte[] EncryptBytes(byte[] input)
         {
             byte[] returnArray = new byte[input.Length];
@@ -249,62 +138,26 @@ namespace LoginServer.Cryptography
             return returnArray;
         }
 
-        #endregion // Encryption methods
-
-        #region // Decryption methods
-
-        /// <summary>
-        /// Decrypt arbitrary-length byte array (input), writing the resulting byte array to the output buffer.
-        /// </summary>
-        /// <remarks>Since this is symmetric operation, it doesn't really matter if you use Encrypt or Decrypt method</remarks>
-        /// <param name="output">Output byte array</param>
-        /// <param name="input">Input byte array</param>
-        /// <param name="numBytes">Number of bytes to decrypt</param>
         public void DecryptBytes(byte[] output, byte[] input, int numBytes)
         {
             this.WorkBytes(output, input, numBytes);
         }
 
-        /// <summary>
-        /// Decrypt arbitrary-length byte stream (input), writing the resulting bytes to another stream (output)
-        /// </summary>
-        /// <param name="output">Output stream</param>
-        /// <param name="input">Input stream</param>
-        /// <param name="howManyBytesToProcessAtTime">How many bytes to read and write at time, default is 1024</param>
         public void DecryptStream(Stream output, Stream input, int howManyBytesToProcessAtTime = 1024)
         {
             this.WorkStreams(output, input, howManyBytesToProcessAtTime);
         }
 
-        /// <summary>
-        /// Async decrypt arbitrary-length byte stream (input), writing the resulting bytes to another stream (output)
-        /// </summary>
-        /// <param name="output">Output stream</param>
-        /// <param name="input">Input stream</param>
-        /// <param name="howManyBytesToProcessAtTime">How many bytes to read and write at time, default is 1024</param>
         public async Task DecryptStreamAsync(Stream output, Stream input, int howManyBytesToProcessAtTime = 1024)
         {
             await this.WorkStreamsAsync(output, input, howManyBytesToProcessAtTime);
         }
 
-        /// <summary>
-        /// Decrypt arbitrary-length byte array (input), writing the resulting byte array to preallocated output buffer.
-        /// </summary>
-        /// <remarks>Since this is symmetric operation, it doesn't really matter if you use Encrypt or Decrypt method</remarks>
-        /// <param name="output">Output byte array, must have enough bytes</param>
-        /// <param name="input">Input byte array</param>
         public void DecryptBytes(byte[] output, byte[] input)
         {
             WorkBytes(output, input, input.Length);
         }
 
-        /// <summary>
-        /// Decrypt arbitrary-length byte array (input), writing the resulting byte array that is allocated by method.
-        /// </summary>
-        /// <remarks>Since this is symmetric operation, it doesn't really matter if you use Encrypt or Decrypt method</remarks>
-        /// <param name="input">Input byte array</param>
-        /// <param name="numBytes">Number of bytes to encrypt</param>
-        /// <returns>Byte array that contains decrypted bytes</returns>
         public byte[] DecryptBytes(byte[] input, int numBytes)
         {
             byte[] returnArray = new byte[numBytes];
@@ -312,12 +165,6 @@ namespace LoginServer.Cryptography
             return returnArray;
         }
 
-        /// <summary>
-        /// Decrypt arbitrary-length byte array (input), writing the resulting byte array that is allocated by method.
-        /// </summary>
-        /// <remarks>Since this is symmetric operation, it doesn't really matter if you use Encrypt or Decrypt method</remarks>
-        /// <param name="input">Input byte array</param>
-        /// <returns>Byte array that contains decrypted bytes</returns>
         public byte[] DecryptBytes(byte[] input)
         {
             byte[] returnArray = new byte[input.Length];
@@ -325,12 +172,6 @@ namespace LoginServer.Cryptography
             return returnArray;
         }
 
-        /// <summary>
-        /// Decrypt UTF8 byte array to string.
-        /// </summary>
-        /// <remarks>Here you can NOT swap encrypt and decrypt methods, because of bytes-string transform</remarks>
-        /// <param name="input">Byte array</param>
-        /// <returns>Byte array that contains encrypted bytes</returns>
         public string DecryptUTF8ByteArray(byte[] input)
         {
             byte[] tempArray = new byte[input.Length];
@@ -338,8 +179,6 @@ namespace LoginServer.Cryptography
             WorkBytes(tempArray, input, input.Length);
             return System.Text.Encoding.UTF8.GetString(tempArray);
         }
-
-        #endregion // Decryption methods
 
         private void WorkStreams(Stream output, Stream input, int howManyBytesToProcessAtTime = 1024)
         {
@@ -377,12 +216,6 @@ namespace LoginServer.Cryptography
             }
         }
 
-        /// <summary>
-        /// Encrypt or decrypt an arbitrary-length byte array (input), writing the resulting byte array to the output buffer. The number of bytes to read from the input buffer is determined by numBytes.
-        /// </summary>
-        /// <param name="output">Output byte array</param>
-        /// <param name="input">Input byte array</param>
-        /// <param name="numBytes">How many bytes to process</param>
         private void WorkBytes(byte[] output, byte[] input, int numBytes)
         {
             if (isDisposed)
@@ -465,18 +298,7 @@ namespace LoginServer.Cryptography
             }
         }
 
-        /// <summary>
-        /// The ChaCha Quarter Round operation. It operates on four 32-bit unsigned integers within the given buffer at indices a, b, c, and d.
-        /// </summary>
-        /// <remarks>
-        /// The ChaCha state does not have four integer numbers: it has 16. So the quarter-round operation works on only four of them -- hence the name. Each quarter round operates on four predetermined numbers in the ChaCha state.
-        /// See <a href="https://tools.ietf.org/html/rfc7539#page-4">ChaCha20 Spec Sections 2.1 - 2.2</a>.
-        /// </remarks>
-        /// <param name="x">A ChaCha state (vector). Must contain 16 elements.</param>
-        /// <param name="a">Index of the first number</param>
-        /// <param name="b">Index of the second number</param>
-        /// <param name="c">Index of the third number</param>
-        /// <param name="d">Index of the fourth number</param>
+
         private static void QuarterRound(uint[] x, uint a, uint b, uint c, uint d)
         {
             x[a] = Util.Add(x[a], x[b]);
@@ -492,19 +314,11 @@ namespace LoginServer.Cryptography
             x[b] = Util.Rotate(Util.XOr(x[b], x[c]), 7);
         }
 
-        #region Destructor and Disposer
-
-        /// <summary>
-        /// Clear and dispose of the internal state. The finalizer is only called if Dispose() was never called on this cipher.
-        /// </summary>
         ~ChaCha20()
         {
             Dispose(false);
         }
 
-        /// <summary>
-        /// Clear and dispose of the internal state. Also request the GC not to call the finalizer, because all cleanup has been taken care of.
-        /// </summary>
         public void Dispose()
         {
             Dispose(true);
@@ -514,12 +328,6 @@ namespace LoginServer.Cryptography
             GC.SuppressFinalize(this);
         }
 
-        /// <summary>
-        /// This method should only be invoked from Dispose() or the finalizer. This handles the actual cleanup of the resources.
-        /// </summary>
-        /// <param name="disposing">
-        /// Should be true if called by Dispose(); false if called by the finalizer
-        /// </param>
         private void Dispose(bool disposing)
         {
             if (!isDisposed)
@@ -535,7 +343,5 @@ namespace LoginServer.Cryptography
 
             isDisposed = true;
         }
-
-        #endregion // Destructor and Disposer
     }
 }

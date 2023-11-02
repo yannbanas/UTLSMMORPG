@@ -9,7 +9,6 @@ namespace LoginServer.Entities
 
     public class User
     {
-
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
@@ -20,7 +19,6 @@ namespace LoginServer.Entities
         public bool IsBanned { get; set; } = false;
         public string Created { get; set; } = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         public string? LastConnectionTime { get; set; } = "";
-
 
         public override string ToString()
         {

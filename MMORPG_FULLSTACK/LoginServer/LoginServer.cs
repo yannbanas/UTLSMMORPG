@@ -18,16 +18,10 @@ namespace LoginServer
         private int port;
         private readonly IConfiguration _configuration;
         private readonly AppDbContext _dbContext;
-
         // Dictionnaire pour stocker les jetons des sessions et les associer aux noms d'utilisateur
         private Dictionary<string, string> userTokens = new Dictionary<string, string>();
-
         private Dictionary<TcpClient, string> connectedClientsWithTokens = new Dictionary<TcpClient, string>();
-
-
-
         public bool IsMaintenanceMode { get; private set; } = false;
-
 
         public LoginServer(AppDbContext dbContext, IConfiguration configuration)
         {
@@ -134,7 +128,7 @@ namespace LoginServer
                 return false;
             }
 
-            return user.Authority.Contains("A") && user.IsValid && !user.IsDeleted;
+            return user.Authority.Contains("A") && user.IsValid && !user.IsBanned;
         }
 
         public async void SetMaintenanceMode(bool isMaintenance)
@@ -171,7 +165,5 @@ namespace LoginServer
             var user = _dbContext.Users.FirstOrDefault(u => u.Token == token);
             return user?.Username;
         }
-
-
     }
 }

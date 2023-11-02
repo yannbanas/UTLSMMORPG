@@ -1,6 +1,5 @@
 # UTLSMMORPG
-![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/w/yannbanas/UTLSMMORPG/main)
-
+![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/w/yannbanas/UTLSMMORPG/main) [![CodeFactor](https://www.codefactor.io/repository/github/yannbanas/utlsmmorpg/badge)](https://www.codefactor.io/repository/github/yannbanas/utlsmmorpg)
 This is a free and opensource self hosted **universal** and **tiny login server** for **mmorpg** (Unity/Unreal/Stride/...)
 
 ### Fonctionnalités essentielles d'un serveur de connexion pour un MMORPG :
@@ -13,6 +12,8 @@ This is a free and opensource self hosted **universal** and **tiny login server*
     - [ ] Enregistrement de nouveaux utilisateurs.
     - [ ] Validation des entrées.
     - [ ] Confirmation par email.
+    - [ ] Modification des informations du compte.
+    - [ ] Suppression de compte.
 
 - **Récupération de mot de passe** :
     - [ ] Possibilité de réinitialiser le mot de passe.
@@ -35,8 +36,6 @@ This is a free and opensource self hosted **universal** and **tiny login server*
 - **Maintenance** :
     - [x] Possibilité de mise en mode maintenance.
     - [x] Notifications de maintenance.
-    
-    (pas encore de test Xunit)
 
 - **Communication avec d'autres serveurs** :
     - [ ] Redirection vers un serveur de jeu après authentification.
@@ -52,3 +51,8 @@ This is a free and opensource self hosted **universal** and **tiny login server*
 
 - **Support multilingue** :
     - [ ] Messages d'erreur et d'information dans différentes langues.
+
+- **Gestion de personnages** :
+    - [ ] Sélection du personnage après connexion.
+    - [ ] Création de nouveaux personnages.
+    - [ ] Suppression de personnages.

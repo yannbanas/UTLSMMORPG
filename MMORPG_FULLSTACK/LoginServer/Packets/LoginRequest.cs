@@ -1,18 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace LoginServer.Packets
 {
     public class LoginRequest : Packet
     {
+
+
         public string Username { get; private set; }
         public string Password { get; private set; }
 
         public LoginRequest(string username, string password) : base(PacketType.LoginRequest, $"{username}:{password}")
         {
+
             Username = username;
             Password = password;
         }
@@ -27,6 +27,8 @@ namespace LoginServer.Packets
 
             Username = parts[0];
             Password = parts[1];
+
         }
+
     }
 }

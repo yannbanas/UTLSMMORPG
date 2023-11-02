@@ -26,8 +26,16 @@ namespace LoginServer.Database
                 .HasDefaultValue("P");
 
             modelBuilder.Entity<User>()
+                .Property(u => u.IsValid)
+                .HasDefaultValue(true);
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.IsBanned)
+                .HasDefaultValue(false);
+
+            modelBuilder.Entity<User>()
                 .Property(u => u.Created)
-                .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                .HasDefaultValue(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
         }
     }
 }

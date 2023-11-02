@@ -20,3 +20,72 @@
 16:02:50||Login failed for userone|
 16:02:50||packet before serialize: ||Notification|Login ou mot de passe incorrecte|
 16:02:50||Client disconnected|
+19:11:54||Configuring services...|
+19:11:54||Sucessfully loaded database settings|
+19:11:54||PostgreSQL database configured|
+19:11:54||Starting login server...|
+19:11:54||Login server started on port 8888|
+19:32:07||Configuring services...|
+19:32:07||Sucessfully loaded database settings|
+19:32:07||PostgreSQL database configured|
+19:32:07||Starting login server...|
+19:32:07||Login server started on port 8888|
+19:32:12||Client connected from 192.168.1.48:3142|
+19:32:12||Error while handling client|
+System.ArgumentException: Invalid Username or Password format.
+   at LoginServer.Packets.LoginRequest..ctor(String username, String password) in C:\Users\EltrasStudio\Documents\GitHub\UTLSMMORPG\MMORPG_FULLSTACK\LoginServer\Packets\LoginRequest.cs:line 17
+   at LoginServer.LoginServer.HandleClient(TcpClient client) in C:\Users\EltrasStudio\Documents\GitHub\UTLSMMORPG\MMORPG_FULLSTACK\LoginServer\LoginServer.cs:line 75
+19:32:12||Client disconnected|
+19:37:42||Configuring services...|
+19:37:42||Sucessfully loaded database settings|
+19:37:42||PostgreSQL database configured|
+19:37:42||Starting login server...|
+19:37:42||Login server started on port 8888|
+19:38:43||Client connected from 192.168.1.48:3285|
+19:38:43||Received login request from testUser|
+19:38:44||Token a6df213f-cf70-4108-a1a3-7a82e2571dbc saved for testUser|
+19:38:44||packet before serialize: ||LoginResponse|SUCCESS:a6df213f-cf70-4108-a1a3-7a82e2571dbc|
+19:38:44||Sent login response to testUser|
+19:38:44||Client disconnected|
+19:45:43||Client connected from 192.168.1.48:3501|
+19:45:43||Client connected from 192.168.1.48:3500|
+19:45:43||Received login request from sdbfhgdefoyg|
+19:45:43||Received login request from testUser|
+19:45:43||Error while handling client|
+System.InvalidOperationException: A second operation was started on this context instance before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+   at System.Linq.Enumerable.TryGetSingle[TSource](IEnumerable`1 source, Boolean& found)
+   at lambda_method3(Closure , QueryContext )
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.Execute[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.Any[TSource](IQueryable`1 source, Expression`1 predicate)
+   at LoginServer.LoginServer.CheckLogin(String username, String password) in C:\Users\EltrasStudio\Documents\GitHub\UTLSMMORPG\MMORPG_FULLSTACK\LoginServer\LoginServer.cs:line 124
+   at LoginServer.LoginServer.HandleClient(TcpClient client) in C:\Users\EltrasStudio\Documents\GitHub\UTLSMMORPG\MMORPG_FULLSTACK\LoginServer\LoginServer.cs:line 79
+19:45:43||Client disconnected|
+19:45:43||Token 6657ac7c-42f5-41b8-b4f5-87a4e3d4afe9 saved for testUser|
+19:45:43||packet before serialize: ||LoginResponse|SUCCESS:6657ac7c-42f5-41b8-b4f5-87a4e3d4afe9|
+19:45:43||Sent login response to testUser|
+19:45:43||Client disconnected|
+19:49:20||Client connected from 192.168.1.48:3552|
+19:49:20||Received login request from testUser|
+19:49:20||Token 53509345-dcf9-4b70-9e0d-1d5dcfdb1d67 saved for testUser|
+19:49:20||packet before serialize: ||LoginResponse|SUCCESS:53509345-dcf9-4b70-9e0d-1d5dcfdb1d67|
+19:49:20||Sent login response to testUser|
+19:49:20||Client disconnected|
+19:50:26||Client connected from 192.168.1.48:3583|
+19:50:26||Received login request from sdbfhgdefoyg|
+19:50:26||Login failed for sdbfhgdefoyg|
+19:50:26||packet before serialize: ||Notification|Login ou mot de passe incorrecte|
+19:50:26||Client disconnected|
+20:02:20||Client connected from 192.168.1.48:3792|
+20:02:20||Received login request from testUser|
+20:02:20||Token be46ae85-56ca-4ec7-8c42-47f50d286bbb saved for testUser|
+20:02:20||packet before serialize: ||LoginResponse|SUCCESS:be46ae85-56ca-4ec7-8c42-47f50d286bbb|
+20:02:20||Sent login response to testUser|
+20:02:20||Client disconnected|
+20:02:20||Client connected from 192.168.1.48:3794|
+20:02:20||Received login request from sdbfhgdefoyg|
+20:02:20||Login failed for sdbfhgdefoyg|
+20:02:20||packet before serialize: ||Notification|Login ou mot de passe incorrecte|
+20:02:20||Client disconnected|
